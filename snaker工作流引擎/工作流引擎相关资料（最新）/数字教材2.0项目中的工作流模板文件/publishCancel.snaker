@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="取消发行流程" name="publishCancel">
+<start displayName="start2" layout="67,103,-1,-1" name="startPublishCancel">
+<transition g="" name="transition8" offset="0,0" to="commitPublishCancel"/>
+</start>
+<task autoExecute="Y" displayName="取消发行" expireTime="expireTime" layout="140,101,-1,-1" name="commitPublishCancel" performType="ANY" taskType="Major">
+<transition g="" name="transition9" offset="0,0" to="checkPublishCancel"/>
+</task>
+<task autoExecute="Y" displayName="取消发行审核" expireTime="expireTime" layout="256,101,-1,-1" name="checkPublishCancel" performType="ANY" taskType="Major">
+<transition g="" name="transition10" offset="0,0" to="decision4"/>
+</task>
+<decision displayName="decision4" layout="373,103,-1,-1" name="decision4">
+<transition displayName="取消失败" expr="${test==0}" g="" name="publishCancelNO" offset="-1,-1" to="publishCancelEndNO"/>
+<transition displayName="取消成功" expr="${test==1}" g="" name="publishCancelOK" offset="0,0" to="publishCancelEndOK"/>
+</decision>
+<end displayName="end3" layout="503,103,-1,-1" name="publishCancelEndOK"/>
+<end displayName="end1" layout="372,214,-1,-1" name="publishCancelEndNO"/>
+</process>

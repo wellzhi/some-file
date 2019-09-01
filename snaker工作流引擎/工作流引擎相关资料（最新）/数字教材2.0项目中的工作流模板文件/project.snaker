@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="发行流程" name="project">
+<end displayName="end1" layout="619,101,-1,-1" name="endProjectOK"/>
+<task autoExecute="Y" displayName="项目申请" expireTime="expireTime" layout="238,101,-1,-1" name="commitProject" performType="ANY" taskType="Major">
+<transition g="" name="transition4" offset="0,0" to="checkProject"/>
+</task>
+<task autoExecute="Y" displayName="项目审核" expireTime="expireTime" layout="378,101,-1,-1" name="checkProject" performType="ANY" taskType="Major">
+<transition g="" name="transition5" offset="0,0" to="decision2"/>
+</task>
+<decision displayName="decision2" layout="508,103,-1,-1" name="decision2">
+<transition displayName="通过" expr="${test==1}" g="" name="projectOK" offset="0,0" to="endProjectOK"/>
+<transition displayName="不通过" expr="${test==0}" g="" name="projectNO" offset="1,2" to="endProjectNO"/>
+</decision>
+<start displayName="start1" layout="148,105,-1,-1" name="startProject">
+<transition g="" name="transition1" offset="0,0" to="commitProject"/>
+</start>
+<end displayName="end1" layout="508,205,-1,-1" name="endProjectNO"/>
+</process>

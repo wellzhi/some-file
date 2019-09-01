@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="数字教材审测流程" name="examination">
+<start displayName="start1" layout="44,58,-1,-1" name="start">
+<transition g="" name="transition6" offset="0,0" to="commit"/>
+</start>
+<decision displayName="decision1" layout="142,274,-1,-1" name="testShunt">
+<transition displayName="初审不通过" expr="${test == 0}" g="" name="testNO" offset="-4,-11" to="reDo"/>
+<transition displayName="初审通过" expr="${test == 1}" g="" name="testOK" offset="0,0" to="testEdit"/>
+</decision>
+<task autoExecute="Y" displayName="复审" layout="189,272,-1,-1" name="test2" performType="ANY" taskType="Major">
+<transition g="" name="test2" offset="0,0" to="test2Shunt"/>
+</task>
+<task autoExecute="Y" displayName="返回重做（初审）" layout="120,415,-1,-1" name="reDo" performType="ANY" taskType="Major">
+<transition displayName="重提初审" g="" name="transition9" offset="-19,1" to="test"/>
+</task>
+<decision displayName="decision1" layout="307,274,40,38" name="test2Shunt">
+<transition displayName="复审通过" expr="${test == 1}" g="" name="test2OK" offset="-1,-1" to="test2Edit"/>
+<transition displayName="复审不通过" expr="${test == 0}" g="" name="test2NO" offset="0,0" to="reDo2"/>
+</decision>
+<task autoExecute="Y" displayName="终审" layout="354,272,-1,-1" name="test3" performType="ANY" taskType="Major">
+<transition g="" name="test3" offset="-6,0" to="test3Shunt"/>
+</task>
+<decision displayName="decision1" layout="465,274,-1,-1" name="test3Shunt">
+<transition displayName="终审不通过" expr="${test == 0}" g="" name="test3NO" offset="-1,-2" to="reDo3"/>
+<transition displayName="终审通过" expr="${test == 1}" g="" name="test3OK" offset="-4,4" to="test3Edit"/>
+</decision>
+<task autoExecute="Y" displayName="一校" layout="525,273,92,50" name="check" performType="ANY" taskType="Major">
+<transition g="" name="check" offset="0,0" to="checkShunt"/>
+</task>
+<decision displayName="decision1" layout="644,274,-1,-1" name="checkShunt">
+<transition displayName="一校通过" expr="${test == 1}" g="" name="checkOK" offset="-10,16" to="checkEdit"/>
+<transition displayName="一校不通过" expr="${test==0}" g="" name="checkNO" offset="2,-18" to="reCheck"/>
+</decision>
+<task autoExecute="Y" displayName="二校" layout="729,272,-1,-1" name="check2" performType="ANY" taskType="Major">
+<transition g="" name="toCheck2" offset="0,0" to="check2Shunt"/>
+</task>
+<decision displayName="decision1" layout="852,274,-1,-1" name="check2Shunt">
+<transition displayName="二校通过" expr="${test == 1}" g="" name="check2OK" offset="-11,14" to="check2Edit"/>
+<transition displayName="二校不通过" expr="${test==0}" g="" name="check2NO" offset="2,-15" to="reCheck2"/>
+</decision>
+<task autoExecute="Y" displayName="三校" layout="935,272,-1,-1" name="check3" performType="ANY" taskType="Major">
+<transition g="" name="toCheck3" offset="0,0" to="check3Shunt"/>
+</task>
+<decision displayName="decision1" layout="1037,274,-1,-1" name="check3Shunt">
+<transition displayName="三校通过" expr="${test == 1}" g="" name="check3OK" offset="3,-15" to="check3Edit"/>
+<transition displayName="三校不通过" expr="${test==0}" g="" name="check3NO" offset="-4,-14" to="reCheck3"/>
+</decision>
+<task autoExecute="Y" displayName="发行审批" layout="910,388,-1,-1" name="publish" performType="ANY" taskType="Major">
+<transition g="" name="toPublish" offset="0,0" to="publishShunt"/>
+</task>
+<decision displayName="发行审批" layout="783,390,-1,-1" name="publishShunt">
+<transition displayName="发行通过" expr="${test == 1}" g="" name="publishOK" offset="6,-11" to="packed"/>
+<transition displayName="发行不通过" expr="${test==0}" g="" name="publishNO" offset="2,-2" to="rePublish"/>
+</decision>
+<end displayName="end1" layout="631,468,-1,-1" name="end1"/>
+<task autoExecute="N" displayName="初审" layout="22,272,-1,-1" name="test" performType="ANY" taskType="Major">
+<transition g="" name="test" offset="1,0" to="testShunt"/>
+</task>
+<task autoExecute="Y" displayName="重提一校" layout="622,139,-1,-1" name="reCheck" performType="ANY" taskType="Major">
+<transition g="" name="transition1" offset="0,0" to="check"/>
+</task>
+<task autoExecute="Y" displayName="重提二校" layout="830,141,-1,-1" name="reCheck2" performType="ANY" taskType="Major">
+<transition g="" name="transition2" offset="0,0" to="check2"/>
+</task>
+<task autoExecute="Y" displayName="重提三校" layout="1046,141,-1,-1" name="reCheck3" performType="ANY" taskType="Major">
+<transition g="" name="transition3" offset="0,0" to="check3"/>
+</task>
+<task autoExecute="Y" displayName="重提发行" layout="910,466,-1,-1" name="rePublish" performType="ANY" taskType="Major">
+<transition g="" name="transition4" offset="0,0" to="publish"/>
+</task>
+<task autoExecute="N" displayName="提请审测" layout="22,139,-1,-1" name="commit" performType="ANY" taskType="Major">
+<transition g="" name="transition5" offset="0,0" to="test"/>
+</task>
+<task autoExecute="N" displayName="返回修改(初审)" layout="114,139,104,52" name="testEdit" performType="ANY" taskType="Major">
+<transition g="" name="transition10" offset="0,0" to="test2"/>
+</task>
+<task autoExecute="N" displayName="返回修改(复审)" layout="285,141,-1,-1" name="test2Edit" performType="ANY" taskType="Major">
+<transition g="" name="transition7" offset="0,0" to="test3"/>
+</task>
+<task autoExecute="Y" displayName="返回修改(终审)" layout="443,139,-1,-1" name="test3Edit" performType="ANY" taskType="Major">
+<transition g="" name="transition8" offset="0,0" to="check"/>
+</task>
+<task autoExecute="Y" displayName="返回修改(一校)" layout="729,139,-1,-1" name="checkEdit" performType="ANY" taskType="Major">
+<transition g="" name="transition11" offset="0,0" to="check2"/>
+</task>
+<task autoExecute="Y" displayName="返回修改(二校)" layout="935,141,-1,-1" name="check2Edit" performType="ANY" taskType="Major">
+<transition g="" name="transition12" offset="0,0" to="check3"/>
+</task>
+<task autoExecute="Y" displayName="返回修改(三校)" layout="1054,388,-1,-1" name="check3Edit" performType="ANY" taskType="Major">
+<transition g="" name="transition13" offset="0,0" to="publish"/>
+</task>
+<task autoExecute="Y" displayName="返回重做（终审）" layout="443,415,-1,-1" name="reDo3" performType="ANY" taskType="Major">
+<transition g="" name="transition16" offset="0,0" to="test"/>
+</task>
+<task autoExecute="Y" displayName="返回重做（复审）" layout="285,415,-1,-1" name="reDo2" performType="ANY" taskType="Major">
+<transition g="" name="transition15" offset="0,0" to="test"/>
+</task>
+<task autoExecute="Y" displayName="已提交" layout="609,388,-1,-1" name="packed" performType="ANY" taskType="Major">
+<transition g="" name="transition17" offset="0,0" to="end1"/>
+</task>
+</process>

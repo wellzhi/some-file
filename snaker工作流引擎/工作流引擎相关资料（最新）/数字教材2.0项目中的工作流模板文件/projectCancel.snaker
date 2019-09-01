@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="项目撤回流程" expireTime="${test==1}" name="projectCancel">
+<start displayName="start2" layout="54,103,-1,-1" name="projectCancelStart">
+<transition g="" name="transition8" offset="0,0" to="commitProjectCancel"/>
+</start>
+<task autoExecute="Y" displayName="项目撤回" expireTime="expireTime" layout="140,101,-1,-1" name="commitProjectCancel" performType="ANY" taskType="Major">
+<transition g="" name="transition9" offset="0,0" to="checkProjectCancel"/>
+</task>
+<task autoExecute="Y" displayName="项目撤回审核" expireTime="expireTime" layout="256,101,-1,-1" name="checkProjectCancel" performType="ANY" taskType="Major">
+<transition g="" name="transition10" offset="0,0" to="decision4"/>
+</task>
+<decision displayName="decision4" layout="373,103,-1,-1" name="decision4">
+<transition displayName="撤回成功" expr="${test==1}" g="" name="cancelProjectOK" offset="-5,0" to="projectCancelEndOK"/>
+<transition displayName="撤回失败" expr="${test==0}" g="" name="cancelProjectNO" offset="2,-8" to="projectCancelEndNO"/>
+</decision>
+<end displayName="end3" layout="512,103,-1,-1" name="projectCancelEndOK"/>
+<end displayName="end1" layout="373,211,-1,-1" name="projectCancelEndNO"/>
+</process>
